@@ -11,7 +11,7 @@ class Stock:
         data = urllib.request.urlopen(url)
         data = json.load(data)
 
-        print("Data: " + data)
+        print(data)
 
 
     def compare_lowest(symbol, date): # date must be in the form yyyy-mm-dd
@@ -42,7 +42,7 @@ class Stock:
         data = json.load(data)
         iter(data["Time Series (Daily)"])
 
-        print("Data: " + next(iter(data["Time Series (Daily)"].items())))
+        print(next(iter(data["Time Series (Daily)"].items())))
 
     def data_from_this_date(symbol, date):
         api_key = "G3UER06K80CNLHNV"
@@ -51,7 +51,7 @@ class Stock:
         data = urllib.request.urlopen(url)
         data = json.load(data)
 
-        print("Data: " + data["Time Series (Daily)"][date])
+        print(data["Time Series (Daily)"][date])
 
     ## counts the number of lows repeated beneath a certain bracket the gives a percentage of how likely it will hit it
     def predict_low_of_next(symbol, today_date, percentage_in_integer): # the variable is how low it will go in percent form
@@ -92,7 +92,7 @@ class Stock:
         counter = 0
 
         for item, date in data["Time Series (Daily)"].items():
-            if float(date["3. low"]) >= price:
+            if float(date["3. low"]) >= float(price):
                 counter = counter + 1
 
         print("There is a " + str(counter / len(data["Time Series (Daily)"]) * 100) +
@@ -110,7 +110,7 @@ class Stock:
         counter = 0
 
         for item, date in data["Time Series (Daily)"].items():
-            if float(date["3. low"]) <= price:
+            if float(date["3. low"]) <= float(price):
                 counter = counter + 1
 
         print("There is a " + str(counter / len(data["Time Series (Daily)"]) * 100) +
